@@ -33,7 +33,7 @@ type CompressionConfig struct {
 	// default compression level, 0 causing the compressor to use
 	// no compression and 1 to 9 representing increasing (better,
 	// slower) compression levels. If Level is less than -1 or
-	// more then 9, a non-nil error will be returned during
+	// more than 9, a non-nil error will be returned during
 	// encryption. See the constants above for convenient common
 	// settings for Level.
 	Level int
@@ -89,7 +89,7 @@ func (cwc compressedWriteCloser) Close() (err error) {
 // can be written and which MUST be closed on completion. If cc is
 // nil, sensible defaults will be used to configure the compression
 // algorithm.
-func SerializeCompressed(w io.WriteCloser, algo CompressionAlgo, cc *CompressionConfig) (literaldata io.WriteCloser, err error) {
+func SerializeCompressed(w io.WriteCloser, algo CompressionAlgo, cc *CompressionConfig) (literalData io.WriteCloser, err error) {
 	compressed, err := serializeStreamHeader(w, packetTypeCompressed)
 	if err != nil {
 		return
@@ -119,7 +119,7 @@ func SerializeCompressed(w io.WriteCloser, algo CompressionAlgo, cc *Compression
 		return
 	}
 
-	literaldata = compressedWriteCloser{compressed, compressor}
+	literalData = compressedWriteCloser{compressed, compressor}
 
 	return
 }
